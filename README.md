@@ -4,6 +4,8 @@
 Consume a readable stream generator-style. Works with streams1 (push) and
 streams2 (pull) streams!
 
+[![build status](https://secure.travis-ci.org/juliangruber/co-read.png)](http://travis-ci.org/juliangruber/co-read)
+
 ## Example
 
 Log all chunks from a stream to stdout:
