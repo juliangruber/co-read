@@ -3,7 +3,7 @@ var read = require('..');
 var co = require('co');
 var through = require('through');
 
-test('stream1: read', function(t) {
+test('read', function(t) {
   var times = 3;
   t.plan(2 + times);
 
@@ -24,24 +24,6 @@ test('stream1: read', function(t) {
     }
 
     t.ok(true, 'ended');
-  }, t.error.bind(t));
-});
-
-test('stream1: error', function(t) {
-  t.plan(2);
-
-  co(function*() {
-    var stream = through();
-
-    process.nextTick(function() {
-      stream.emit('error', new Error('bad'));
-    });
-
-    try {
-      yield read(stream);
-    } catch(err) {
-      t.ok(err);
-    }
   }, t.error.bind(t));
 });
 
