@@ -1,6 +1,6 @@
 {
   "name": "co-read",
-  "description": "Consume a readable stream generator style",
+  "description": "Consume a readable stream generator-style",
   "version": "0.0.0",
   "repository": {
     "type": "git",
