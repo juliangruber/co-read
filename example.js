@@ -3,20 +3,35 @@ var co = require('co');
 var read = require('./');
 
 co(function*() {
-  console.log('streams2 stream\n');
-  var res = yield request('http://google.com/');
+  var server = http.createServer(function(req, res) {
+    res.write('  foo');
+    res.end('  bar');
+  });
+  server.listen(8744);
+
+  console.log('');
+  console.log('streams2 stream');
+  console.log('');
+
+  var res = yield request('http://localhost:8744/');
   var buf;
   while(buf = yield read(res)) {
     console.log(buf.toString());
   }
 
-  console.log('streams1 stream\n');
-  var res = yield request('http://google.com/');
+  console.log('');
+  console.log('streams1 stream');
+  console.log('');
+
+  var res = yield request('http://localhost:8744/');
   res.pause(); // force streams1 stream
   var buf;
   while(buf = yield read(res)) {
     console.log(buf.toString());
   }
+
+  console.log('');
+  server.close();
 });
 
 function request(url) {
