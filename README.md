@@ -47,7 +47,7 @@ npm install co-read
 
 The streams2 part is based on
 [previous work](https://github.com/visionmedia/co/commit/d1f03a936a70d7c7cb27c9d95b53ed567a4ded10)
-from @TooTallNate.
+from [TooTallNate](https://github.com/TooTallNate).
 
 ## License
 
