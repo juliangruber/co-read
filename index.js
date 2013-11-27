@@ -73,6 +73,10 @@ function* read1(stream) {
 
 function read2(stream) {
   return function(done) {
+    if (!stream.readable) {
+      return done();
+    }
+
     function onreadable() {
       cleanup();
       check();
