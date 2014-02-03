@@ -4,4 +4,7 @@ test:
 		--harmony \
 		--reporter spec
 
-.PHONY: test
+example:
+	@node --harmony example
+
+.PHONY: test example
