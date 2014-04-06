@@ -25,43 +25,39 @@ function read(stream) {
  * @return {Function}
  */
 
-function* read1(stream) {
-  var err;
-  var data;
+function read1(stream) {
+  stream.pause();
 
-  stream.on('data', ondata);
-  stream.on('error', onerror);
-  stream.resume();
+  return function(done) {
+    if (!stream.readable) return done();
 
-  function ondata(_data) {
-    stream.pause();
-    data = _data;
-  }
+    stream.on('data', ondata);
+    stream.on('error', onerror);
+    stream.on('end', onend);
+    stream.resume();
 
-  function onerror(_err) {
-    err = _err;
-  }
-
-  yield function (done) {
-    if (err || data || !stream.readable) return done();
-
-    stream.on('data', onevent);
-    stream.on('end', onevent);
-    stream.on('error', onevent);
-
-    function onevent() {
-      stream.removeListener('data', onevent);
-      stream.removeListener('end', onevent);
-      stream.removeListener('error', onevent);
-      done();
+    function ondata(data) {
+      stream.pause();
+      cleanup();
+      done(null, data);
     }
-  };
 
-  stream.removeListener('data', ondata);
-  stream.removeListener('error', onerror);
+    function onerror(err) {
+      cleanup();
+      done(err);
+    }
 
-  if (err) throw err;
-  return data;
+    function onend(data) {
+      cleanup();
+      done(null, data);
+    }
+
+    function cleanup() {
+      stream.removeListener('data', ondata);
+      stream.removeListener('error', onerror);
+      stream.removeListener('end', onend);
+    }
+  }
 }
 
 /**
