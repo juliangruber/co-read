@@ -1,4 +1,3 @@
-
 # co-read
 
 Consume a readable stream generator-style. Works with streams1 (push) and
@@ -17,8 +16,9 @@ var read = require('co-read');
 
 co(function*() {
   var stream = createStreamSomehow();
+  var next = read(stream);
   var buf;
-  while(buf = yield read(stream)) {
+  while(buf = yield next) {
     console.log(buf);  
   }
 });
