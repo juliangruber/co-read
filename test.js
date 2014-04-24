@@ -10,44 +10,44 @@ describe('read(stream)', function(){
   describe('push streams', function(){
     it('should read', function(done){
       var stream = through();
-      
+
       co(function*() {
         equal(yield read(stream), 'foo');
         equal(yield read(stream), 'bar');
         equal(yield read(stream), undefined);
-      }, done);
-      
+      })(done);
+
       co(function*(){
         stream.queue('foo');
         stream.queue('bar');
         stream.queue(null);
       })();
     });
-    
+
     it('should throw errors', function(done){
       var stream = through();
-      
+
       co(function*() {
         yield read(stream);
-      }, function(err){
+      })(function(err){
         assert(err);
         done();
       });
-      
+
       co(function*(){
         stream.emit('error', new Error);
       })();
     });
-    
+
     it('should handle backpressure', function(done){
       var stream = through();
-      
+
       co(function*() {
         equal(yield read(stream), 'foo');
         equal(yield read(stream), 'bar');
         equal(yield read(stream), undefined);
-      }, done);
-      
+      })(done);
+
       co(function*(){
         yield wait();
         stream.queue('foo');
@@ -58,11 +58,11 @@ describe('read(stream)', function(){
       })();
     });
   });
-  
+
   describe('pull streams', function(){
     it('should read', function(done){
       var times = 3;
-      
+
       co(function*(){
         var stream = Readable();
         stream._read = function(){
@@ -71,17 +71,17 @@ describe('read(stream)', function(){
             stream.push('foo');
           });
         };
-        
+
         equal(yield read(stream), 'foo');
         equal(yield read(stream), 'foo');
         equal(yield read(stream), 'foo');
         equal(yield read(stream), null);
       })(done);
     });
-    
+
     it('should read', function(done){
       var times = 2;
-      
+
       co(function*(){
         var stream = Readable();
         stream._read = function(){
@@ -94,7 +94,7 @@ describe('read(stream)', function(){
             }
           });
         };
-        
+
         equal(yield read(stream), 'foo');
         equal(yield read(stream), 'bar');
         equal(yield read(stream), 'foo');
@@ -102,26 +102,26 @@ describe('read(stream)', function(){
         equal(yield read(stream), null);
       })(done);
     });
-    
+
     it('should end', function(done){
       co(function*() {
         var stream = Readable();
         stream.push(null);
-        
+
         equal(yield read(stream), null);
         equal(yield read(stream), null);
-      }, done);
+      })(done);
     });
-    
+
     it('should throw', function(done){
       co(function*(){
         var stream = Readable();
         stream._read = function() {
           stream.emit('error', new Error);
         };
-        
+
         yield read(stream);
-      }, function(err){
+      })(function(err){
         assert(err);
         done();
       });

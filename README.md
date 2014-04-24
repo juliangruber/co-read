@@ -19,9 +19,9 @@ co(function*() {
   var stream = createStreamSomehow();
   var buf;
   while(buf = yield read(stream)) {
-    console.log(buf);  
+    console.log(buf);
   }
-});
+})();
 ```
 
 Also check out `/example.js` for a complete example using http streams, both
