@@ -32,7 +32,7 @@ co(function*() {
 
   console.log('');
   server.close();
-});
+})();
 
 function request(url) {
   return function(done) {
