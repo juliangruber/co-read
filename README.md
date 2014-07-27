@@ -4,7 +4,8 @@
 Consume a readable stream generator-style. Works with streams1 (push) and
 streams2 (pull) streams!
 
-[![build status](https://secure.travis-ci.org/juliangruber/co-read.png)](http://travis-ci.org/juliangruber/co-read)
+[![build status](https://secure.travis-ci.org/juliangruber/co-read.svg)](http://travis-ci.org/juliangruber/co-read)
+[![downloads](https://img.shields.io/npm/dm/co-read.svg)](https://www.npmjs.org/package/co-read)
 
 ## Example
 
