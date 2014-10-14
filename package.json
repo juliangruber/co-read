@@ -12,7 +12,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "debug": "^1.0.3"
+    "stream-read": "~1.0.1"
   },
   "devDependencies": {
     "co": "^3.0.5",
