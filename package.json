@@ -12,13 +12,13 @@
     "test": "make test"
   },
   "dependencies": {
-    "stream-read": "~1.0.1"
+    "stream-read": "~1.1.2"
   },
   "devDependencies": {
-    "co": "^3.0.5",
+    "co": "^4.6.0",
     "through": "^2.3.4",
     "co-wait": "0.0.0",
-    "mocha": "^1.18.2"
+    "mocha": "^3.1.2"
   },
   "keywords": [
     "co",
